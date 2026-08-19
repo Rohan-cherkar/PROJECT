@@ -1,0 +1,324 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+main {
+  flex: 1;
+}
+footer {
+  margin-top: auto;
+}
+.navbar {
+  height: 5rem;
+  /* position: sticky ; */
+  background-color: white;
+  position: fixed;
+  bottom: 10px;
+}
+.nav-link {
+  color: #222222 !important;
+}
+
+.f-info-links a {
+  text-decoration: none;
+  color: #222222;
+}
+
+.f-info-links a:hover {
+  text-decoration: underline;
+}
+
+/* .f-info-links{
+    width: 100%;
+}
+.f-info-socials{
+    width: 100%;
+    font-size: 1.2rem;
+} */
+.f-info-socials i {
+  margin-right: 1rem;
+}
+.f-info-links,
+.f-info-socials,
+.f-info-brand {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#nev {
+  text-decoration: none;
+}
+.f-info {
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: space-evenly;
+  height: 5rem;
+  background-color: #ebebeb;
+}
+
+.card {
+  border: none !important;
+  margin-bottom: 2rem;
+}
+.card-img-top {
+  border-radius: 1rem !important;
+  width: 100% !important;
+  object-fit: cover !important;
+}
+.card-body {
+  padding: 0 !important;
+}
+
+.card-text p {
+  font-weight: 400;
+}
+
+.card-img-overlay {
+  opacity: 0;
+}
+
+.card-img-overlay:hover {
+  opacity: 0.2;
+  background-color: #ebebeb;
+}
+
+/* for the new Listing */
+form {
+  width: 100%;
+  max-width: 550px;
+  margin: 40px auto;
+  padding: 35px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
+}
+.h3-heading {
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 25px;
+  font-size: 28px;
+  font-weight: 600;
+  color: #222;
+}
+
+form input,
+form textarea {
+  width: 100%;
+  padding: 14px 16px;
+  margin-bottom: 5px;
+  box-sizing: border-box;
+
+  border: 1px solid #b0b0b0;
+  border-radius: 10px;
+
+  font-size: 15px;
+  font-family: inherit;
+
+  outline: none;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+form textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+form input:focus,
+form textarea:focus {
+  border-color: #cf6969;
+  box-shadow: 0 0 0 2px rgba(255, 56, 92, 0.15);
+}
+form input::placeholder,
+form textarea::placeholder {
+  color: #717171;
+}
+
+form button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 10px;
+
+  border: none;
+  border-radius: 10px;
+
+  background-color: #ff385c;
+  color: white;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s,
+    transform 0.1s;
+}
+
+form button:hover {
+  background-color: #e31c5f;
+}
+form button:active {
+  transform: scale(0.98);
+}
+
+/* Show.ejs file */
+.show h3 {
+  margin: 0 0 18px;
+  font-size: 24px;
+}
+
+/* Listing details card */
+.show ul {
+  list-style: none;
+
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 30px;
+
+  background-color: #fff;
+
+  border: 1px solid #ddd;
+  border-radius: 16px;
+
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+
+  box-sizing: border-box;
+}
+
+/* Individual listing details */
+.show li {
+  padding: 10px 0;
+  font-size: 15px;
+}
+
+.show li:first-child {
+  font-size: 21px;
+}
+
+/* First item - title */
+.show li:first-child {
+  font-size: 24px;
+  font-weight: 600;
+  padding-top: 0;
+}
+
+/* Price */
+.show li:nth-child(3) {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+/* Edit link */
+.show a {
+  display: block;
+
+  width: fit-content;
+
+  margin: 25px auto 15px;
+  padding: 12px 22px;
+
+  background-color: #222;
+  color: white;
+
+  text-decoration: none;
+
+  border-radius: 8px;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  transition:
+    background-color 0.2s,
+    transform 0.1s;
+}
+
+/* Edit hover */
+.show a:hover {
+  background-color: #444;
+}
+
+/* Delete form */
+.show form {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* Delete button */
+.show button {
+  display: block;
+
+  margin: 0 auto;
+
+  padding: 12px 22px;
+
+  background-color: #fff;
+  color: #d32f2f;
+
+  border: 1px solid #d32f2f;
+  border-radius: 8px;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+/* Delete hover */
+.show button:hover {
+  background-color: #d32f2f;
+  color: white;
+}
+
+/* Mobile responsive */
+@media (max-width: 600px) {
+  .show h3 {
+    margin-top: 30px;
+    font-size: 20px;
+  }
+
+  .show ul {
+    margin: 0 15px;
+    padding: 20px;
+  }
+}
+.show li img {
+  width: 100%;
+  height: 300px;     
+
+  display: block;
+  object-fit: cover;
+
+  border-radius: 12px;
+}
+
+.show {
+  width: 90%;
+  max-width: 600px;  
+
+  margin: 35px auto;
+  padding: 20px;     
+
+  background-color: #fff;
+
+  border: 1px solid #ddd;
+  border-radius: 15px;
+
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+
+  box-sizing: border-box;
+}

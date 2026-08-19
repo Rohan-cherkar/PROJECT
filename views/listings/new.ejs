@@ -1,41 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Romely</title>
-  </head>
-  <body>
-    <h3>Create the new Listing</h3>
-    <form action="/listings" method="POST">
-      <input
-        type="text"
-        name="listing[title]"
-        placeholder="Enter Title"
-        
-      />
-      <br />
-      <br />
-      <textarea
-        type="text"
-        name="listing[description]"
-        placeholder="Enter Descripton"
-      ></textarea
-      ><br />
-      <br />
-      <input type="text" name="listing[image]" placeholder="Enter image url" />
-      <br /><br />
-      <input type="number" name="listing[price]" placeholder="Enter Price" />
-      <br /><br />
-      <input
-        type="text"
-        name="listing[location]"
-        placeholder="Enter Location"
-      />
-      <br /><br />
-      <input type="text" name="listing[country]" placeholder="Enter Country" />
-      <br /><br />
-      <button>Add</button>
-    </form>
-  </body>
-</html>
+<% layout("/layouts/boilerplate") %>
+<body>
+  <h3 class="h3-heading">Create the new Listing</h3>
+  <form action="/listings" method="POST">
+    <label for=""> Title</label>
+    <input type="text" name="listing[title]" placeholder="Enter Title" />
+    <br />
+    <br />
+    <label for="">Description</label>
+    <textarea
+      type="text"
+      name="listing[description]"
+      placeholder="Enter Descripton"
+    ></textarea
+    ><br />
+    <br />
+    <label for="">Image Link</label>
+    <input
+      type="text"
+      name="listing[image.url]"
+      placeholder="Enter image URL/link"
+    />
+    <br /><br />
+    <label for="">Price</label>
+    <input type="number" name="listing[price]" placeholder="Enter Price" />
+    <br /><br />
+    <label for="">Location</label>
+    <input type="text" name="listing[location]" placeholder="Enter Location" />
+
+    <label for="">Country</label>
+    <input type="text" name="listing[country]" placeholder="Enter Country" />
+
+    <br /><br />
+    <button>Add</button>
+  </form>
+</body>

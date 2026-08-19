@@ -1,20 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Romely</title>
-</head>
-<body>
+<% layout("/layouts/boilerplate") %>
+
     <h3>All listings</h3>
-    <form action="/listings/new" method="GET">
+    <!-- <form action="/listings/new" method="GET">
         <button>Create New Listing</button>
-    </form>
-    <ul>
-    <% allListings.forEach(element => { %>
-     <a href="/listings/<%= element._id %>"><%=element.title%> </a><br>
-    <% }) %>
-    </ul>
-</body>
-</html>
+    </form> -->
+    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1"> 
+        <% allListings.forEach(element => { %>
+            <a id="nev" href="/listings/<%= element._id %>">
+                <div class="card col">
+                    <img src="<%= element.image.url%>" class="card-img-top" alt="Listing Image" style="height: 20rem;">
+                    <div class="card-img-overlay"></div>
+                    <div class="card-body">
+                        <p class="card-text"><b><%= element.title%></b> <br>
+                        ₹ <%= element.price.toLocaleString("en-IN") %>
+                        </p>
+
+                    </div>
+                </div>
+            </a>
+        <% }) %>
+    </div>
+
+    
+
+
 
