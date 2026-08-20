@@ -1,40 +1,67 @@
 <% layout("/layouts/boilerplate") %>
 
 <h3 class="h3-heading">Edit Your Listing</h3>
-<form action="/listings/<%= listing.id%>?_method=PATCH" method="POST">
-  <label for="listing[title]">Title</label>
+<form
+  action="/listings/<%= listing.id%>?_method=PATCH"
+  method="POST"
+  novalidate
+  class="needs-validation"
+>
+  <label for="listing[title]" class="form-label">Title</label>
   <input
     type="text"
     name="listing[title]"
     placeholder="Enter Title"
     value="<%= listing.title %>"
+    class="form-control"
+    required
   />
-  <br />
-  <br />
+
   <label for="listing[description]">Descripton</label>
   <textarea
     type="text"
     name="listing[description]"
     placeholder="Enter Descripton"
+    class="form-control"
+    required
   >
 <%= listing.description %>"</textarea
-  ><br />
-  <br />
+  >
   <label for="listing[image.url]">Image Link</label>
   <input
     type="text"
     name="listing[image.url]"
     value="<%= listing.image.url %>"
+    class="form-control"
+    required
   />
-  <br /><br />
+
   <label for="listing[price]">Price</label>
-  <input type="number" name="listing[price]" value="<%= listing.price %>" />
-  <br /><br />
+  <input
+    type="number"
+    name="listing[price]"
+    required
+    value="<%= listing.price %>"
+    class="form-control"
+  />
+
   <label for="listing[location]">Location</label>
-  <input type="text" name="listing[location]" value="<%= listing.location %>" />
-  <br /><br />
+  <input
+    type="text"
+    name="listing[location]"
+    required
+    value="<%= listing.location %>"
+    class="form-control"
+  />
+
   <label for="listing[country]">Country</label>
-  <input type="text" name="listing[country]" value="<%= listing.country %>" />
-  <br /><br />
+  <input
+    type="text"
+    name="listing[country]"
+    required
+    value="<%= listing.country %>"
+    class="form-control"
+  />
+
   <button>Edit</button>
 </form>

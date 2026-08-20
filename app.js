@@ -5,11 +5,12 @@ const Listing = require("./models/listing.js");
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
+const wrapAsync=require("./utils/wrapAsync.js")
 
 app.use(methodOverride("_method"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "/public")));
-app.set("view engine", "ejs"); 
+app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 app.engine("ejs", ejsMate);
@@ -42,12 +43,12 @@ app.get("/listings/new", (req, res) => {
   res.render("listings/new.ejs");
 });
 
-app.post("/listings", async (req, res) => {
+app.post("/listings", wrapAsync( async (req, res, next) => {
   // let {title,description,image,price,location,country}=req.body;
-  const listing = new Listing(req.body.listing);
-  await listing.save();
-  res.redirect("/listings");
-});
+    const listing = new Listing(req.body.listing);
+    await listing.save();
+    res.redirect("/listings");
+}));
 
 // Show Specific Listing
 app.get("/listings/:id", async (req, res) => {
@@ -90,6 +91,10 @@ app.delete("/listings/:id", async (req, res) => {
 //   console.log("sample was saved");
 //   res.send("successful testing");
 // });
+
+app.use((err, req, res, next) => {
+  res.send("Something Went wrong");
+});
 
 const port = 3000;
 app.listen(port, () => {

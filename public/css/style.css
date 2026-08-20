@@ -27,7 +27,6 @@ footer {
   color: #222222 !important;
 }
 
-
 .f-info-links a {
   text-decoration: none;
   color: #222222;
@@ -97,9 +96,9 @@ footer {
 
 /* for the new Listing */
 form {
-  width: 100%;
+  width: 100% ;
   max-width: 550px;
-  margin: 40px auto;
+  margin: 30px auto;
   padding: 35px;
   background-color: #fff;
   border: 1px solid #ddd;
@@ -109,7 +108,7 @@ form {
 }
 .h3-heading {
   text-align: center;
-  margin-top: 40px;
+  /* margin-top: 10px; */
   margin-bottom: 25px;
   font-size: 28px;
   font-weight: 600;
@@ -140,8 +139,8 @@ form textarea {
 }
 form input:focus,
 form textarea:focus {
-  border-color: #cf6969;
-  box-shadow: 0 0 0 2px rgba(255, 56, 92, 0.15);
+  border-color: #50cdf7;
+  box-shadow: 0 0 0 3px rgba(20, 146, 249, 0.15);
 }
 form input::placeholder,
 form textarea::placeholder {
@@ -174,6 +173,9 @@ form button:hover {
 }
 form button:active {
   transform: scale(0.98);
+}
+.form-control {
+  margin-bottom: 1rem;
 }
 
 /* Show.ejs file */
@@ -229,7 +231,7 @@ form button:active {
 
 .show form {
   display: inline-block;
-  margin: 0 ;
+  margin: 0;
 }
 
 /* Edit Button */
@@ -294,8 +296,7 @@ form button:active {
 .form-btns {
   display: flex;
   justify-content: space-between;
-
 }
-#show-delete{
+#show-delete {
   margin: 0;
 }
