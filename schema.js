@@ -1,15 +1,33 @@
+// const Joi = require("joi");
+
+// module.exports = listingSchema = Joi.object({
+//   listing: Joi.object({
+//     title: Joi.string().required(),
+//     description: Joi.string().required(),
+//     price: Joi.number().min(0).required(),
+//     country: Joi.string().required(),
+//     location: Joi.string().required(),
+
+//     image: Joi.object({
+//       url: Joi.string().allow(""),
+//     }).optional(),
+//   }).required(),
+// });
+
 const Joi = require("joi");
 
-module.exports = listingSchema = Joi.object({
+const listingSchema = Joi.object({
   listing: Joi.object({
     title: Joi.string().required(),
     description: Joi.string().required(),
     price: Joi.number().min(0).required(),
-    country: Joi.string().required(),
     location: Joi.string().required(),
+    country: Joi.string().required(),
 
     image: Joi.object({
-      url: Joi.string().allow(""),
+      url: Joi.string().uri().allow("").optional(),
     }).optional(),
   }).required(),
 });
+
+module.exports = listingSchema;

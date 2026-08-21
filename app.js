@@ -17,7 +17,7 @@ app.set("views", path.join(__dirname, "views"));
 
 const validateListing = (req, res, next) => {
   //currently nort in use
-  console.log(listingSchema);
+  // console.log(listingSchema);
   let { error } = listingSchema.validate(req.body);
   if (error) {
     console.log(error);
@@ -62,7 +62,7 @@ app.get("/listings/new", (req, res) => {
 
 app.post(
   "/listings",
-  // validateListing,
+  validateListing,
   wrapAsync(async (req, res, next) => {
     // let {title,description,image,price,location,country}=req.body;
     const listing = new Listing(req.body.listing);
@@ -96,7 +96,7 @@ app.get(
 // Update Route
 app.put(
   "/listings/:id",
-  // validateListing,
+  validateListing,
   wrapAsync(async (req, res) => {
     let { id } = req.params;
     await Listing.findByIdAndUpdate(id, { ...req.body.listing });
