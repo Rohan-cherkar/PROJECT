@@ -7,22 +7,25 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const wrapAsync = require("./utils/wrapAsync.js");
 const ExpressError = require("./utils/ExpressError.js");
-const { listingSchema } = require("./schema.js");
+const listingSchema = require("./schema.js");
 
 app.use(methodOverride("_method"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "/public")));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
-// const validateListing = (req, res, next) => {
-//   let { error } = listingSchema.validate(req.body);
-//   if (error) {
-//     console.log(error)
-//     throw new ExpressError(400,   error);
-//   } else {
-//     next();
-//   }
-// };
+
+const validateListing = (req, res, next) => {
+  //currently nort in use
+  console.log(listingSchema);
+  let { error } = listingSchema.validate(req.body);
+  if (error) {
+    console.log(error);
+    throw new ExpressError(400, error);
+  } else {
+    next();
+  }
+};
 
 app.engine("ejs", ejsMate);
 
@@ -63,6 +66,7 @@ app.post(
   wrapAsync(async (req, res, next) => {
     // let {title,description,image,price,location,country}=req.body;
     const listing = new Listing(req.body.listing);
+    // console.log(listing);
     await listing.save();
     res.redirect("/listings");
   }),
