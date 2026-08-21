@@ -5,13 +5,24 @@ const Listing = require("./models/listing.js");
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
-const wrapAsync=require("./utils/wrapAsync.js")
+const wrapAsync = require("./utils/wrapAsync.js");
+const ExpressError = require("./utils/ExpressError.js");
+const { listingSchema } = require("./schema.js");
 
 app.use(methodOverride("_method"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "/public")));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
+// const validateListing = (req, res, next) => {
+//   let { error } = listingSchema.validate(req.body);
+//   if (error) {
+//     console.log(error)
+//     throw new ExpressError(400,   error);
+//   } else {
+//     next();
+//   }
+// };
 
 app.engine("ejs", ejsMate);
 
@@ -33,51 +44,71 @@ app.get("/", (req, res) => {
 });
 
 // index route
-app.get("/listings", async (req, res) => {
-  const allListings = await Listing.find({});
-  res.render("listings/index.ejs", { allListings });
-});
+app.get(
+  "/listings",
+  wrapAsync(async (req, res) => {
+    const allListings = await Listing.find({});
+    res.render("listings/index.ejs", { allListings });
+  }),
+);
 
 // Create new listing
 app.get("/listings/new", (req, res) => {
   res.render("listings/new.ejs");
 });
 
-app.post("/listings", wrapAsync( async (req, res, next) => {
-  // let {title,description,image,price,location,country}=req.body;
+app.post(
+  "/listings",
+  // validateListing,
+  wrapAsync(async (req, res, next) => {
+    // let {title,description,image,price,location,country}=req.body;
     const listing = new Listing(req.body.listing);
     await listing.save();
     res.redirect("/listings");
-}));
+  }),
+);
 
 // Show Specific Listing
-app.get("/listings/:id", async (req, res) => {
-  let { id } = req.params;
-  const listing = await Listing.findById(id);
-  res.render("listings/show.ejs", { listing });
-});
+app.get(
+  "/listings/:id",
+  wrapAsync(async (req, res) => {
+    let { id } = req.params;
+    const listing = await Listing.findById(id);
+    res.render("listings/show.ejs", { listing });
+  }),
+);
 
 // edit route
-app.get("/listings/:id/edit", async (req, res) => {
-  let { id } = req.params;
-  // console.log(id);
-  let listing = await Listing.findById(id);
-  res.render("listings/edit.ejs", { listing });
-});
+app.get(
+  "/listings/:id/edit",
+  wrapAsync(async (req, res) => {
+    let { id } = req.params;
+    // console.log(id);
+    let listing = await Listing.findById(id);
+    res.render("listings/edit.ejs", { listing });
+  }),
+);
 
 // Update Route
-app.patch("/listings/:id", async (req, res) => {
-  let { id } = req.params;
-  await Listing.findByIdAndUpdate(id, { ...req.body.listing });
-  res.redirect(`/listings/${id}`);
-});
+app.put(
+  "/listings/:id",
+  // validateListing,
+  wrapAsync(async (req, res) => {
+    let { id } = req.params;
+    await Listing.findByIdAndUpdate(id, { ...req.body.listing });
+    res.redirect(`/listings/${id}`);
+  }),
+);
 
 // delete the listing
-app.delete("/listings/:id", async (req, res) => {
-  let { id } = req.params;
-  await Listing.findByIdAndDelete(id);
-  res.redirect("/listings");
-});
+app.delete(
+  "/listings/:id",
+  wrapAsync(async (req, res) => {
+    let { id } = req.params;
+    await Listing.findByIdAndDelete(id);
+    res.redirect("/listings");
+  }),
+);
 
 // app.get("/testListing", async (req, res) => {
 //   let sampleListing = new Listing({
@@ -92,8 +123,15 @@ app.delete("/listings/:id", async (req, res) => {
 //   res.send("successful testing");
 // });
 
+// express errors Page not Found if user try to access random page
+app.all("/*splat", (req, res, next) => {
+  next(new ExpressError(404, "Page not Found"));
+});
+
 app.use((err, req, res, next) => {
-  res.send("Something Went wrong");
+  let { statusCode = 500, message = "Something Went Wrong" } = err;
+  // res.status(statusCode).send(message);
+  res.status(statusCode).render("listings/error.ejs", { err });
 });
 
 const port = 3000;
