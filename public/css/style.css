@@ -68,7 +68,18 @@ footer {
   background-color: #ebebeb;
 }
 
-.card {
+.rating-btn {
+  background-color: #add633 !important;
+}
+.rating-btn:hover {
+  background: #a0c15a !important;
+}
+
+#show-delete {
+  width: 130px;
+}
+.listing-card {
+  color: black;
   border: none !important;
   margin-bottom: 2rem;
 }
@@ -96,7 +107,7 @@ footer {
 
 /* for the new Listing */
 form {
-  width: 100% ;
+  width: 100%;
   max-width: 550px;
   margin: 30px auto;
   padding: 35px;
@@ -113,6 +124,11 @@ form {
   font-size: 28px;
   font-weight: 600;
   color: #222;
+}
+.no-style {
+  border: initial;
+  padding: initial;
+  background: initial;
 }
 
 form input,
@@ -299,4 +315,13 @@ form button:active {
 }
 #show-delete {
   margin: 0;
+}
+
+.del-review {
+  width: 60px !important;
+  height: 20px !important;
+  font-size: 0.8rem !important;
+  padding:0 !important;
+  margin-bottom:10px  !important;
+  background: #853953 !important;
 }
