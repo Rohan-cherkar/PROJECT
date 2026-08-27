@@ -4,7 +4,7 @@ const wrapAsync = require("../utils/wrapAsync.js");
 const ExpressError = require("../utils/ExpressError.js");
 const { listingSchema, reviewSchema } = require("../schema.js");
 const Listing = require("../models/listing.js");
-const {isLoggedIn}=require("../middleware.js")
+const { isLoggedIn } = require("../middleware.js");
 
 const validateListing = (req, res, next) => {
   //currently nort in use
@@ -18,8 +18,6 @@ const validateListing = (req, res, next) => {
   }
 };
 
-
-
 router.get(
   "/",
   wrapAsync(async (req, res) => {
@@ -29,7 +27,7 @@ router.get(
 );
 
 // Create new listing
-router.get("/new", isLoggedIn,(req, res) => {
+router.get("/new", isLoggedIn, (req, res) => {
   res.render("listings/new.ejs");
 });
 
@@ -39,6 +37,7 @@ router.post(
   wrapAsync(async (req, res, next) => {
     // let {title,description,image,price,location,country}=req.body;
     const listing = new Listing(req.body.listing);
+    listing.owner = req.user._id;
     // console.log(listing);
     await listing.save();
     req.flash("success", "New Listing Created !!");
@@ -51,11 +50,14 @@ router.get(
   "/:id",
   wrapAsync(async (req, res) => {
     let { id } = req.params;
-    const listing = await Listing.findById(id).populate("reviews");
+    const listing = await Listing.findById(id)
+      .populate("reviews")
+      .populate("owner");
     if (!listing) {
       req.flash("error", "Listing you requested does not exist :( ");
       return res.redirect("/listings");
     }
+    // console.log(listing.owner)
     res.render("listings/show.ejs", { listing });
   }),
 );
