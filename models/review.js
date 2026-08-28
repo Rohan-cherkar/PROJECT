@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { UserExistsError } = require("passport-local-mongoose/dist/lib/errors");
 const Schema = mongoose.Schema;
 
 const reviewListing = new Schema({
