@@ -1,9 +1,23 @@
 const Listing = require("../models/listing");
+const User = require("../models/user");
 
+
+// work and learn more about this index 
 module.exports.index = async (req, res) => {
-  const { category } = req.query;
+  const { category, q } = req.query;
   let allListings;
-  if (category) {
+  if (q && q.trim() !== "") {
+    const searchRegex = new RegExp(q.trim(), "i");
+    allListings = await Listing.find({
+      $or: [
+        { title: { $regex: searchRegex } },
+        { location: { $regex: searchRegex } },
+        { country: { $regex: searchRegex } },
+        { description: { $regex: searchRegex } },
+        { category: { $regex: searchRegex } },
+      ],
+    });
+  } else if (category) {
     const keywordMap = {
       Trending: /trending|luxur|penthouse|island|villa|private/i,
       Rooms: /room|loft|apartment|condo|suite|brownstone|house/i,
@@ -30,8 +44,57 @@ module.exports.index = async (req, res) => {
   } else {
     allListings = await Listing.find({});
   }
-  res.render("listings/index.ejs", { allListings, category });
+
+  let userWatchlist = [];
+  if (req.user) {
+    const currUserObj = await User.findById(req.user._id);
+    if (currUserObj && currUserObj.watchlist) {
+      userWatchlist = currUserObj.watchlist.map((id) => id.toString());
+    }
+  }
+
+  res.render("listings/index.ejs", { allListings, category, q, userWatchlist });
 };
+
+module.exports.toggleWatchlist = async (req, res) => {
+  if (!req.user) {
+    return res.status(401).json({ success: false, message: "Please login first" });
+  }
+  const { id } = req.params;
+  const currUserObj = await User.findById(req.user._id);
+  const index = currUserObj.watchlist.indexOf(id);
+  let isLiked = false;
+  if (index > -1) {
+    currUserObj.watchlist.splice(index, 1);
+    isLiked = false;
+  } else {
+    currUserObj.watchlist.push(id);
+    isLiked = true;
+  }
+  await currUserObj.save();
+  return res.json({ success: true, isLiked });
+};
+
+module.exports.getWatchlist = async (req, res) => {
+  const currUserObj = await User.findById(req.user._id).populate("watchlist");
+  const watchlistListings = currUserObj ? currUserObj.watchlist : [];
+  const userWatchlist = watchlistListings.map((l) => l._id.toString());
+  res.render("listings/watchlist.ejs", { watchlistListings, userWatchlist });
+};
+
+module.exports.getHostedListings = async (req, res) => {
+  const hostedListings = await Listing.find({ owner: req.user._id });
+  let userWatchlist = [];
+  if (req.user) {
+    const currUserObj = await User.findById(req.user._id);
+    if (currUserObj && currUserObj.watchlist) {
+      userWatchlist = currUserObj.watchlist.map((id) => id.toString());
+    }
+  }
+  res.render("listings/mylistings.ejs", { hostedListings, userWatchlist });
+};
+
+// till here
 
 module.exports.newForm = (req, res) => {
   res.render("listings/new.ejs");

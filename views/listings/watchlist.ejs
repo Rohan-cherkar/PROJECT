@@ -1,0 +1,36 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="mt-3 mb-4">
+    <h3 class="fw-bold"><i class="fa-solid fa-heart text-danger me-2"></i>My Watchlist</h3>
+    <p class="text-muted">Saved destinations you want to visit.</p>
+</div>
+
+<% if (!watchlistListings || watchlistListings.length === 0) { %>
+    <div class="col-12 text-center my-5 py-5 bg-white rounded-4 border">
+        <i class="fa-regular fa-heart display-1 text-danger opacity-50 mb-3"></i>
+        <h4 class="text-dark fw-semibold">Your Watchlist is empty</h4>
+        <p class="text-muted">Explore destinations and click the heart icon to save listings here!</p>
+        <a href="/listings" class="btn btn-danger px-4 mt-2 rounded-3">Explore Destinations</a>
+    </div>
+<% } else { %>
+    <div class="row row-cols-lg-4 row-cols-md-2 row-cols-sm-1"> 
+        <% watchlistListings.forEach(element => { %>
+            <a id="nev" href="/listings/<%= element._id %>">
+                <div class="card listing-card col position-relative">
+                    <div class="position-relative">
+                        <img src="<%= element.image.url%>" class="card-img-top" alt="Listing Image" style="height: 20rem;">
+                        <button type="button" class="like-badge-btn liked" onclick="toggleLike(event, '<%= element._id %>')" title="Remove from Watchlist">
+                            <i class="fa-solid fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="card-img-overlay"></div>
+                    <div class="card-body">
+                        <p class="card-text"><b><%= element.title%></b> <br>
+                        ₹ <%= element.price.toLocaleString("en-IN") %>
+                        </p>
+                    </div>
+                </div>
+            </a>
+        <% }) %>
+    </div>
+<% } %>

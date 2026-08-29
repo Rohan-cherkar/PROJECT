@@ -87,6 +87,42 @@ footer {
   border: none !important;
   margin-bottom: 2rem;
 }
+
+/* badge on the image  */
+.like-badge-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 10;
+  background:transparent;
+  border: none;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  color: #717171;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s ease-in-out;
+}
+
+.like-badge-btn:hover {
+  transform: scale(1.1);
+  background: transpirent;
+  color: #fe424d;
+}
+
+.like-badge-btn.liked {
+  color: #fe424d !important;
+  background: transparent;
+}
+
+.like-badge-btn.liked i {
+  color: #fe424d !important;
+}
 .card-img-top {
   border-radius: 1rem !important;
   width: 100% !important;
@@ -330,11 +366,59 @@ form button:active {
   background: #853953 !important;
 }
 
-/* styling the navbar  */
 /* Navbar */
 .custom-navbar {
   min-height: 70px;
   padding: 8px 20px;
+}
+
+/* Navbar Search Bar */
+.search-form {
+  border: 1px solid #b0b0b0;
+  border-radius: 30px;
+  padding: 3px 6px 3px 12px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease;
+  max-width: 400px;
+  width: 100%;
+  margin: 0 auto !important;
+}
+
+.search-form:focus-within {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-color: #fe424d;
+}
+
+.search-input {
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 20px !important;
+  padding: 6px 8px !important;
+  font-size: 0.9rem !important;
+  margin-bottom: 0 !important;
+  background: transparent !important;
+}
+
+.search-input:focus {
+  box-shadow: none !important;
+  border-color: transparent !important;
+}
+
+.btn-search {
+  background-color: #fe424d !important;
+  color: #fff !important;
+  border-radius: 20px !important;
+  padding: 6px 16px !important;
+  font-size: 0.9rem !important;
+  font-weight: 500 !important;
+  border: none !important;
+  white-space: nowrap;
+}
+
+.btn-search:hover {
+  background-color: #e31c5f !important;
+  color: #fff !important;
 }
 
 /* Navbar */
@@ -424,13 +508,90 @@ form button:active {
   background-color: #6b89d4 !important;
 }
 
-.logout {
-  background-color: #0d0909 !important;
-  color: rgb(243, 252, 222) !important;
+/* Hero Search Bar between Navbar & Filters */
+.search-bar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  width: 100%;
 }
 
-.logout:hover {
-  background-color: #302e2e !important;
+.search-bar-form {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 650px;
+  background: #ffffff;
+  border: 1px solid #dcdcdc;
+  border-radius: 40px;
+  padding: 6px 8px 6px 20px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  transition: all 0.25s ease;
+  margin: 0 auto !important;
+}
+
+.search-bar-form:hover,
+.search-bar-form:focus-within {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.14);
+  border-color: #fe424d;
+}
+
+.search-field {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  gap: 12px;
+}
+
+.search-icon {
+  font-size: 1.15rem;
+  color: #fe424d;
+}
+
+.search-input-field {
+  width: 100%;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  font-size: 0.95rem;
+  color: #222222;
+  background: transparent !important;
+  padding: 8px 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.search-input-field::placeholder {
+  color: #717171;
+}
+
+.search-submit-btn {
+  background: #fe424d;
+  color: #ffffff;
+  border: none;
+  border-radius: 30px;
+  padding: 10px 24px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+  width: auto;
+  margin-top: 0;
+}
+
+.search-submit-btn:hover {
+  background: #e31c5f;
+  transform: scale(1.02);
+}
+
+.search-submit-btn:active {
+  transform: scale(0.98);
 }
 
 #filters {

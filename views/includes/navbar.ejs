@@ -20,20 +20,23 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse nav-btns" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
+      <div class="navbar-nav me-auto">
         <a class="nav-link" href="/listings">Explore</a>
-       
+        <a class="nav-link" href="/watchlist"><i class="fa-solid fa-heart me-1" style="color: #fe424d;"></i> My Watchlist</a>
+        <% if (currUser) { %>
+          <a class="nav-link" href="/listings/mylistings"><i class="fa-solid fa-house-user me-1" style="color: #fe424d;"></i> My Listings</a>
+        <% } %>
       </div>
-      <div class="navbar-nav">  
-        <a class="nav-link " href="/listings/New">Add New Destination</a>
+
+      <div class="navbar-nav ms-auto">  
+        <a class="nav-link" href="/listings/New">Add New Destination</a>
         <% if (!currUser ) { %>
           <a class="nav-link log-btn signup" href="/signup">Sign up</a>
           <a class="nav-link log-btn login" href="/login">Login</a>
         <% } %>
-          <% if (currUser ) { %>
-            <a class="nav-link logout" href="/logout">Log out</a>
-          <% } %>
-   
+        <% if (currUser ) { %>
+          <a class="nav-link logout" href="/logout">Log out</a>
+        <% } %>
       </div>
     </div>
   </div>

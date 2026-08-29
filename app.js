@@ -52,6 +52,7 @@ app.use((req, res, next) => {
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
   res.locals.currUser = req.user;
+  res.locals.q = req.query.q || "";
   // res.locals.redirectUrl = req.originalUrl;
   next();
 });
@@ -80,6 +81,8 @@ async function main() {
 //   res.send(registeredUser);
 // });
 
+app.get("/watchlist", (req, res) => res.redirect("/listings/watchlist"));
+app.get("/mylistings", (req, res) => res.redirect("/listings/mylistings"));
 app.use("/listings", listingsRouter);
 app.use("/listings/:id/reviews", reviewsRouter);
 app.use("/", userRouter);

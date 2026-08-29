@@ -13,7 +13,14 @@ const multer = require("multer");
 const { storage } = require("../cloudConfig.js");
 const upload = multer({ storage });
 
+router.get("/watchlist", isLoggedIn, wrapAsync(listingController.getWatchlist));
+router.get(
+  "/mylistings",
+  isLoggedIn,
+  wrapAsync(listingController.getHostedListings),
+);
 router.get("/new", isLoggedIn, listingController.newForm);
+router.post("/:id/watchlist", wrapAsync(listingController.toggleWatchlist));
 
 router
   .route("/")

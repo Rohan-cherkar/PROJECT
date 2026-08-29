@@ -7,6 +7,12 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  watchlist: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Listing",
+    },
+  ],
   // username and password is automatically defined by passport-local-mongoose
 });
 

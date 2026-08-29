@@ -1,9 +1,25 @@
 <% layout("/layouts/boilerplate") %>
 
-    <!-- <h3 >All listings</h3> -->
-    <!-- <form action="/listings/new" method="GET">
-        <button>Create New Listing</button>
-    </form> -->
+    <!-- Search Section between Navbar and Filters -->
+    <div class="search-bar-container">
+      <form action="/listings" method="GET" class="search-bar-form">
+        <div class="search-field">
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+          <input 
+            type="text" 
+            name="q" 
+            class="search-input-field" 
+            placeholder="Search any destination, city, country, or category..." 
+            value="<%= typeof q !== 'undefined' ? q : '' %>"
+            autocomplete="off"
+          >
+        </div>
+        <button type="submit" class="search-submit-btn">
+          Search
+        </button>
+      </form>
+    </div>
+
     <div id="filters">
         <a href="<%= typeof category !== 'undefined' && category === 'Trending' ? '/listings' : '/listings?category=Trending' %>" class="filter <%= typeof category !== 'undefined' && category === 'Trending' ? 'active' : '' %>">
             <div class="filt-icon"><i class="fa-solid fa-fire"></i></div>
@@ -47,7 +63,12 @@
         </a>
     </div>
 
-    <% if (typeof category !== 'undefined' && category) { %>
+    <% if (typeof q !== 'undefined' && q) { %>
+        <div class="d-flex align-items-center justify-content-between mb-3 mt-2">
+            <p class="mb-0 text-muted">Showing search results for <strong>"<%= q %>"</strong> (<%= allListings.length %> listings found)</p>
+            <a href="/listings" class="btn btn-sm btn-outline-secondary">Clear Search</a>
+        </div>
+    <% } else if (typeof category !== 'undefined' && category) { %>
         <div class="d-flex align-items-center justify-content-between mb-3 mt-2">
             <p class="mb-0 text-muted">Showing results for <strong>"<%= category %>"</strong> (<%= allListings.length %> listings found)</p>
             <a href="/listings" class="btn btn-sm btn-outline-secondary">Clear Filter</a>
@@ -55,16 +76,21 @@
     <% } %>
 
     <% if (allListings.length === 0) { %>
-        <div class="col-12 text-center my-5">
-            <h4 class="text-muted">No listings found matching "<%= category %>"</h4>
-            <a href="/listings" class="btn btn-danger mt-3">View All Listings</a>
+        <div class="col-12 text-center my-5 py-4">
+            <h4 class="text-muted">No destinations found matching "<%= typeof q !== 'undefined' && q ? q : category %>"</h4>
+            <a href="/listings" class="btn btn-danger mt-3 px-4">View All Listings</a>
         </div>
     <% } else { %>
         <div class="row row-cols-lg-4 row-cols-md-2 row-cols-sm-1"> 
             <% allListings.forEach(element => { %>
                 <a id="nev" href="/listings/<%= element._id %>">
-                    <div class="card listing-card col">
-                        <img src="<%= element.image.url%>" class="card-img-top" alt="Listing Image" style="height: 20rem;">
+                    <div class="card listing-card col position-relative">
+                        <div class="position-relative">
+                            <img src="<%= element.image.url%>" class="card-img-top" alt="Listing Image" style="height: 20rem;">
+                            <button type="button" class="like-badge-btn <%= typeof userWatchlist !== 'undefined' && userWatchlist.includes(element._id.toString()) ? 'liked' : '' %>" onclick="toggleLike(event, '<%= element._id %>')" title="Save to Watchlist">
+                                <i class="<%= typeof userWatchlist !== 'undefined' && userWatchlist.includes(element._id.toString()) ? 'fa-solid' : 'fa-regular' %> fa-heart"></i>
+                            </button>
+                        </div>
                         <div class="card-img-overlay"></div>
                         <div class="card-body">
                             <p class="card-text"><b><%= element.title%></b> <br>
