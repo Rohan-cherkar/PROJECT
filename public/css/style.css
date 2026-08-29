@@ -21,9 +21,9 @@ footer {
   background-color: white;
   position: fixed;
   bottom: 10px;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
-.nav-btns{
+.nav-btns {
   display: flex;
   justify-content: space-between;
 }
@@ -333,68 +333,65 @@ form button:active {
 /* styling the navbar  */
 /* Navbar */
 .custom-navbar {
-  min-height: 70px ;
-  padding: 8px 20px ;
+  min-height: 70px;
+  padding: 8px 20px;
 }
 
 /* Navbar */
 .custom-navbar {
-    padding: 8px 20px ;
+  padding: 8px 20px;
 }
 
 /* Logo */
 .custom-navbar .navbar-brand {
-    display: flex ;
-    align-items: center ;
+  display: flex;
+  align-items: center;
 }
 
 /* Desktop links */
 .custom-navbar .navbar-nav {
-    display: flex ;
-    align-items: center ;
-    gap: 10px ;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .custom-navbar .nav-link {
-    padding: 8px 12px ;
-    font-weight: 500 ;
-    color: #222 ;
-    border-radius: 8px ;
-    transition: all 0.2s ease ;
+  padding: 8px 12px;
+  font-weight: 500;
+  color: #222;
+  border-radius: 8px;
+  transition: all 0.2s ease;
 }
 
 .custom-navbar .nav-link:hover {
-    color: rgb(241, 86, 94) ;
-    background-color: #f8f8f8 ;
+  color: rgb(241, 86, 94);
+  background-color: #f8f8f8;
 }
-
 
 /* Hamburger button */
 .custom-navbar .navbar-toggler {
-    border: none !important;
-    padding: 6px 8px !important;
-    box-shadow: none !important;
+  border: none !important;
+  padding: 6px 8px !important;
+  box-shadow: none !important;
 }
 
 .custom-navbar .navbar-toggler:focus {
-    box-shadow: none !important;
+  box-shadow: none !important;
 }
-
 
 /* ============================
    MOBILE NAVBAR FIX (additive)
    ============================ */
 @media (max-width: 767px) {
-
   /* Force the collapsed panel above any other page content */
   .custom-navbar .navbar-collapse {
-    position: relative ;
-    z-index: 1030 ;
+    position: relative;
+    z-index: 1030;
   }
 
   .custom-navbar .navbar-nav {
-    position: relative ;
-    z-index: 1030 ;
+    position: relative;
+    z-index: 1030;
   }
 
   /* Guarantee your link styling wins over Bootstrap's defaults */
@@ -411,27 +408,96 @@ form button:active {
   }
 }
 
-.signup{
-  background-color: #caea69 !important;
+.signup {
+  background-color: #E4FF30 !important;
   color: rgb(252, 255, 246) !important;
 }
-.signup:hover{
-  background-color: #abc460 !important
+.signup:hover {
+  background-color: #abc460 !important;
 }
 
-.login{
+.login {
   background-color: #7ea1fa !important;
   color: rgb(243, 252, 222) !important;
 }
-.login:hover{
-    background-color: #6b89d4 !important;
+.login:hover {
+  background-color: #6b89d4 !important;
 }
 
-.logout{
-    background-color: #0d0909 !important;
+.logout {
+  background-color: #0d0909 !important;
   color: rgb(243, 252, 222) !important;
 }
 
-.logout:hover{
-    background-color: #302e2e !important;
+.logout:hover {
+  background-color: #302e2e !important;
+}
+
+/* #filters {
+  height: 40px;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  width: 800px;
+}
+.filter {
+  opacity: 0.7;
+}
+.filter:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+.filt-icon {
+  text-align: center;
+  font-size: 1.4rem;
+}
+.filt-name {
+  font-size: 0.8rem;
+} */
+
+#filters {
+    display: flex;
+    flex-wrap: wrap; /* default desktop behavior - wraps to multiple rows */
+    gap: 20px;
+}
+
+.filter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0.7  ;
+}
+
+.filter:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    #filters {
+        flex-wrap: nowrap;          /* stop wrapping */
+        overflow-x: auto;           /* enable horizontal scroll */
+        overflow-y: hidden;
+        width: 100vw;               /* take full phone width */
+        -webkit-overflow-scrolling: touch; /* smooth momentum scroll on iOS */
+        scrollbar-width: none;      /* hide scrollbar - Firefox */
+        gap: 16px;
+        padding: 10px 12px;
+    }
+
+    #filters::-webkit-scrollbar {
+        display: none;              /* hide scrollbar - Chrome/Safari */
+    }
+
+    .filter {
+        flex: 0 0 auto;             /* prevent items from shrinking/wrapping */
+        min-width: 60px;
+    }
+
+    .filt-name {
+        font-size: 12px;
+        white-space: nowrap;        /* keep labels on one line */
+    }
 }
