@@ -6,6 +6,7 @@
   method="POST"
   novalidate
   class="needs-validation"
+  enctype="multipart/form-data"
 >
   <label for="listing[title]" class="form-label">Title</label>
   <input
@@ -24,16 +25,14 @@
     placeholder="Enter Descripton"
     class="form-control"
     required
-  >
-<%= listing.description %></textarea
-  >
-  <label for="listing[image.url]">Image Link</label>
+  ><%= listing.description %></textarea>
+
+  <div class="mb-3"><p>Original Listing Image</p><img style="height: 100px;width: 180px; " src="<%= originalImg %>" alt=""></div>
+  <label for="listing[image]">Image Link</label>
   <input
-    type="text"
-    name="listing[image][url]"
-    value="<%= listing.image.url %>"
+    type="file"
+    name="listing[image]"
     class="form-control"
-    required
   />
 
   <label for="listing[price]">Price</label>

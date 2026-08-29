@@ -410,3 +410,28 @@ form button:active {
     background-color: #f7f7f7 !important;
   }
 }
+
+.signup{
+  background-color: #caea69 !important;
+  color: rgb(252, 255, 246) !important;
+}
+.signup:hover{
+  background-color: #abc460 !important
+}
+
+.login{
+  background-color: #7ea1fa !important;
+  color: rgb(243, 252, 222) !important;
+}
+.login:hover{
+    background-color: #6b89d4 !important;
+}
+
+.logout{
+    background-color: #0d0909 !important;
+  color: rgb(243, 252, 222) !important;
+}
+
+.logout:hover{
+    background-color: #302e2e !important;
+}

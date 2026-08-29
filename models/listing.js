@@ -21,6 +21,7 @@ const listingSchema = new Schema({
       default:
         "https://images.unsplash.com/photo-1586375300773-8384e3e4916f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGxvZGdlfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
     },
+    filename:String,
   },
   price: Number,
   location: String,

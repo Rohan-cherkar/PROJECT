@@ -8,13 +8,22 @@ const {
   validateListing,
   validateReview,
 } = require("../middleware.js");
-
 const listingController = require("../controllers/listing.js");
+const multer = require("multer");
+const { storage } = require("../cloudConfig.js");
+const upload = multer({ storage });
+
+router.get("/new", isLoggedIn, listingController.newForm);
 
 router
   .route("/")
   .get(wrapAsync(listingController.index))
-  .post(validateListing, wrapAsync(listingController.postNewListingForm));
+  .post(
+    validateListing,
+    isLoggedIn,
+    upload.single("listing[image]"),
+    wrapAsync(listingController.postNewListingForm),
+  );
 
 // Show Specific Listing
 router
@@ -22,13 +31,12 @@ router
   .get(wrapAsync(listingController.getListing))
   .put(
     isLoggedIn,
-    validateListing,
     isOwner,
+    upload.single("listing[image]"),
+    validateListing,
     wrapAsync(listingController.updateListing),
   )
   .delete(isLoggedIn, isOwner, wrapAsync(listingController.deleteListing));
-
-router.get("/new", isLoggedIn, listingController.newForm);
 
 // edit route
 router.get(
