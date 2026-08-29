@@ -61,6 +61,14 @@
             <div class="filt-icon"><i class="fa-solid fa-ship"></i></div>
             <p class="filt-name">Cruse</p>
         </a>
+        <a href="<%= typeof category !== 'undefined' && category === 'Cool' ? '/listings' : '/listings?category=Cool' %>" class="filter <%= typeof category !== 'undefined' && category === 'Cool' ? 'active' : '' %>">
+            <div class="filt-icon"><i class="fa-regular fa-snowflake"></i></div>
+            <p class="filt-name">Cool</p>
+        </a>
+        <a href="<%= typeof category !== 'undefined' && category === 'Greenary' ? '/listings' : '/listings?category=Greenary' %>" class="filter <%= typeof category !== 'undefined' && category === 'Greenary' ? 'active' : '' %>">
+            <div class="filt-icon"><i class="fa-solid fa-tree"></i></i></div>
+            <p class="filt-name">Greenary</p>
+        </a>
     </div>
 
     <% if (typeof q !== 'undefined' && q) { %>

@@ -682,10 +682,11 @@ form button:active {
 #filters {
   display: flex;
   flex-wrap: wrap; /* default desktop behavior - wraps to multiple rows */
-  gap: 20px;
+  gap: 30px;
   margin-top: 1rem;
   margin-bottom: 1.5rem;
   align-items: center;
+  justify-content: center;
   /* width: auto; */
 }
 

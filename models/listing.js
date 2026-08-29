@@ -39,6 +39,8 @@ const listingSchema = new Schema({
       "Camping",
       "Farms",
       "Cruse",
+      "Cool",
+      "Greenary",
     ],
   },
   reviews: [

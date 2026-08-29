@@ -6,6 +6,7 @@ const {
   isLoggedIn,
   isOwner,
   validateListing,
+  notIsOwner,
   validateReview,
 } = require("../middleware.js");
 const listingController = require("../controllers/listing.js");
@@ -52,6 +53,11 @@ router.get(
   isOwner,
   wrapAsync(listingController.getEditForm),
 );
-router.get("/:id/reserve", isLoggedIn, listingController.getReserveForm);
+router.get(
+  "/:id/reserve",
+  isLoggedIn,
+  notIsOwner,
+  listingController.getReserveForm,
+);
 
 module.exports = router;

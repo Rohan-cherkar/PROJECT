@@ -29,6 +29,8 @@ module.exports.index = async (req, res) => {
       Camping: /camp|treehouse|nature/i, //|eco|forest|cabin|cottage|log
       Farms: /farm|cottage/i, //|countryside|ranch|nature|cotswolds
       Cruse: /cruse|cruise|boat|ship/i, //|island|maldives|yacht|lake
+      Cool:/Cool|ice|cold|glaciers/i,
+      Greenary:/Green|tree|plant|peace/i,
     };
 
     const regexPattern = keywordMap[category] || new RegExp(category, "i");

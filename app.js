@@ -11,6 +11,8 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError.js");
 const session = require("express-session");
+const MongoStore = require("connect-mongo").default;
+
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
@@ -19,6 +21,9 @@ const User = require("./models/user.js");
 const listingsRouter = require("./routes/listing.js");
 const reviewsRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
+const dbUrl = process.env.ATLASDB_URL;
+
+// const MONGO_URL = "mongodb://127.0.0.1:27017/Roamly";
 
 app.use(methodOverride("_method"));
 app.use(express.urlencoded({ extended: true }));
@@ -26,7 +31,20 @@ app.use(express.static(path.join(__dirname, "/public")));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
+const store = MongoStore.create({
+  mongoUrl: dbUrl,
+  crypto: {
+    secret: "mysupersecretcode",
+  },
+  touchAfter: 360,
+});
+
+store.on("error", () => {
+  console.log("eroor in MONGO SESSION STORE");
+});
+
 const sessionOptions = {
+  store,
   secret: "mysecetcode",
   resave: false,
   saveUninitialized: true,
@@ -59,7 +77,6 @@ app.use((req, res, next) => {
 
 app.engine("ejs", ejsMate);
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/Roamly";
 main()
   .then(() => {
     console.log("connected to DB(Roamly)");
@@ -69,7 +86,7 @@ main()
   });
 
 async function main() {
-  await mongoose.connect(MONGO_URL);
+  await mongoose.connect(dbUrl);
 }
 
 // app.get("/demouser", async (req, res) => {
