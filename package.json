@@ -1,4 +1,7 @@
 {
+  "engines": {
+    "node": "22.23.2"
+  },
   "name": "Roamly",
   "version": "1.0.0",
   "description": "",

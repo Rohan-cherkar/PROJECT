@@ -34,7 +34,7 @@ app.set("views", path.join(__dirname, "views"));
 const store = MongoStore.create({
   mongoUrl: dbUrl,
   crypto: {
-    secret: "mysupersecretcode",
+    secret: process.env.SECRET,
   },
   touchAfter: 360,
 });
@@ -45,7 +45,7 @@ store.on("error", () => {
 
 const sessionOptions = {
   store,
-  secret: "mysecetcode",
+  secret: process.env.SECRET,
   resave: false,
   saveUninitialized: true,
   cookie: {
