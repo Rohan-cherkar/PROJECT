@@ -1,0 +1,26 @@
+<% layout("/layouts/boilerplate") %>
+<form action="" class="reservation-form">
+  <h3 class="row col-6 offset-4">Reservation</h3>
+  <label class="mt-3 mb-1" for="reserveDate">Reservation Date</label>
+  <input class="mt-2 mb-2" type="date" name="reserveDate" id="" />
+
+  <div class="card mb-3 mt-3 price-card" style="width: 30rem auto">
+    <h6>Payable Amount is:</h6>
+
+    <div class="card-body ms-4  row">
+      <div class="ms-3 col-6 offset-1">Number of Peoples: <%= no %></div>
+      <div class="ms-3 mb-1">Price of One Night:&nbsp;&nbsp; <%= price %></div>
+      <hr class="mb-1 price-hr" />
+      <div class="ms-3">Payable Amount: &nbsp; &nbsp;&nbsp; <%= payable %></div>
+    </div>
+  </div>
+  <br>
+  <hr>
+  Payment Method :
+  <div class="pay-icon">
+    <i class="fa-brands fa-google-pay i"></i>
+    <i class="fa-brands fa-apple-pay i"></i>
+    <i class="fa-regular fa-credit-card i"></i>
+    <i class="fa-brands fa-paypal i"></i>
+  </div>
+</form>

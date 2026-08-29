@@ -52,5 +52,6 @@ router.get(
   isOwner,
   wrapAsync(listingController.getEditForm),
 );
+router.get("/:id/reserve", isLoggedIn, listingController.getReserveForm);
 
 module.exports = router;

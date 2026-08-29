@@ -94,7 +94,7 @@ footer {
   top: 12px;
   right: 12px;
   z-index: 10;
-  background:transparent;
+  background: transparent;
   border: none;
   border-radius: 50%;
   width: 38px;
@@ -686,6 +686,7 @@ form button:active {
   margin-top: 1rem;
   margin-bottom: 1.5rem;
   align-items: center;
+  /* width: auto; */
 }
 
 .filter {
@@ -829,4 +830,38 @@ form button:active {
   .flash-message-text {
     font-size: 0.88rem;
   }
+}
+
+.price-card {
+  padding: 0.7rem;
+  border-color: #853953 !important;
+  background-color: #444 !important;
+  color: wheat !important;
+}
+.price-hr {
+  width: 25rem !important;
+}
+
+@media (max-width: 576px) {
+  .price-hr {
+    width: 16rem !important;
+  }
+}
+
+.pay-icon {
+  margin-top: 1.2rem;
+  font-size: 2rem;
+  display: flex;
+  justify-content: space-around;
+}
+.i {
+  opacity: 0.6;
+}
+.i:hover {
+  opacity: 1 !important;
+  cursor: pointer;
+}
+
+.reservation-form{
+  margin-top: 5rem;
 }

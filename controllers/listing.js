@@ -1,8 +1,8 @@
 const Listing = require("../models/listing");
 const User = require("../models/user");
 
-
-// work and learn more about this index 
+// work and learn more about this index
+// search 
 module.exports.index = async (req, res) => {
   const { category, q } = req.query;
   let allListings;
@@ -19,16 +19,16 @@ module.exports.index = async (req, res) => {
     });
   } else if (category) {
     const keywordMap = {
-      Trending: /trending|luxur|penthouse|island|villa|private/i,
-      Rooms: /room|loft|apartment|condo|suite|brownstone|house/i,
-      Mountains: /mountain|chalet|ski|alps|rockies|highland|peak/i,
-      "Iconic Cities": /city|downtown|penthouse|tokyo|boston|miami|new york|amsterdam|dubai|los angeles|florence/i,
-      Beach: /beach|coast|ocean|sea|bay|malibu|cancun|bali|greece|mykonos|phuket|maldives/i,
-      Forts: /fort|castle|historic|tuscany|villa|brownstone|palace/i,
-      Swimming: /swimming|pool|beach|island|water|lake|villa|maldives/i,
-      Camping: /camp|treehouse|nature|eco|forest|cabin|cottage|log/i,
-      Farms: /farm|cottage|countryside|ranch|nature|cotswolds/i,
-      Cruse: /cruse|cruise|boat|ship|island|maldives|yacht|lake/i,
+      Trending: /trending |luxur|penthouse|island|villa|private/i, //|luxur|penthouse|island|villa|private/
+      Rooms: /room|house/i, //|loft|apartment|condo|suite|brownstone
+      Mountains: /mountain/i, //|chalet|ski|alps|rockies|highland|peak
+      "Iconic Cities": /city/i, //downtown|penthouse|tokyo|boston|miami|new york|amsterdam|dubai|los angeles|florence
+      Beach: /beach|coast|ocean|sea/i, //|bay|malibu|cancun|bali|greece|mykonos|phuket|maldives
+      Forts: /fort|castle|historic/i, //|tuscany|villa|brownstone|palace
+      Swimming: /swimming|pool|beach|island/i, //|water|lake|villa|maldives
+      Camping: /camp|treehouse|nature/i, //|eco|forest|cabin|cottage|log
+      Farms: /farm|cottage/i, //|countryside|ranch|nature|cotswolds
+      Cruse: /cruse|cruise|boat|ship/i, //|island|maldives|yacht|lake
     };
 
     const regexPattern = keywordMap[category] || new RegExp(category, "i");
@@ -58,7 +58,9 @@ module.exports.index = async (req, res) => {
 
 module.exports.toggleWatchlist = async (req, res) => {
   if (!req.user) {
-    return res.status(401).json({ success: false, message: "Please login first" });
+    return res
+      .status(401)
+      .json({ success: false, message: "Please login first" });
   }
   const { id } = req.params;
   const currUserObj = await User.findById(req.user._id);
@@ -139,8 +141,8 @@ module.exports.getEditForm = async (req, res) => {
     req.flash("error", "Listing you requested does not exist :( ");
     return res.redirect("/listings");
   }
-  let originalImg=listing.image.url
-  originalImg.replace("/upload","/upload/h_300,w_250")
+  let originalImg = listing.image.url;
+  originalImg.replace("/upload", "/upload/h_300,w_250");
   res.render("listings/edit.ejs", { listing, originalImg });
 };
 
@@ -164,4 +166,15 @@ module.exports.deleteListing = async (req, res) => {
   await Listing.findByIdAndDelete(id);
   req.flash("success", "Listing is deleted ");
   res.redirect("/listings");
+};
+
+module.exports.getReserveForm = async (req, res) => {
+  let { id } = req.params;
+  // console.log()
+  let no = req.query.nPeople;
+  let listing = await Listing.findById(id);
+  let price = listing.price;
+  let payable =no*price
+  // console.log(price,no,payable);
+  res.render("listings/reserve.ejs", {payable,no,price});
 };

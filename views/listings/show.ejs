@@ -21,8 +21,19 @@
         <button id="show-delete">Delete</button>
       </form>
     </div>
-    <% } %>
-    
+    <% } else { %>
+      <form action="/listings/<%= listing.id %>/reserve" method="get" novalidate
+    class="needs-validation">
+        
+        <div>
+            <label for="nPeople" class="mb-1">Number of Individual</label>
+            <input type="number" name="nPeople" id="" required  class="form-control">
+        <div class="invalid-feedback">Please enter the number of Individuals for Future processing</div>
+      </div>
+        
+        <button>Reserve</button>
+      </form>
+      <%} %>
     
  <% if (currUser) { %>
   <hr />
