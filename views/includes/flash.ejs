@@ -1,13 +1,40 @@
 <% if(success && success.length){ %>    
-  <div class="alert alert-success col-8 offset-2 alert-dismissible" role="alert">
-    <H6><%= success %></H6>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  <div class="custom-flash-alert custom-flash-success alert fade show" role="alert">
+    <div class="d-flex align-items-center">
+      <i class="fa-solid fa-circle-check flash-icon me-2"></i>
+      <span class="flash-message-text"><%= success %></span>
+    </div>
+    <button type="button" class="btn-close flash-close-btn" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
 <% } %>
 
 <% if (error && error.length) { %>
- <div class="alert alert-danger col-8 offset-2 alert-dismissible" role="alert">
-    <H6><%= error %></H6>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  <div class="custom-flash-alert custom-flash-error alert fade show" role="alert">
+    <div class="d-flex align-items-center">
+      <i class="fa-solid fa-triangle-exclamation flash-icon me-2"></i>
+      <span class="flash-message-text"><%= error %></span>
+    </div>
+    <button type="button" class="btn-close flash-close-btn" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
 <% } %>
+
+<script>
+  // Auto dismiss flash alerts after 4 seconds
+  setTimeout(() => {
+    const flashAlerts = document.querySelectorAll('.custom-flash-alert');
+    flashAlerts.forEach(alert => {
+      if (typeof bootstrap !== 'undefined' && bootstrap.Alert) {
+        try {
+          const bsAlert = bootstrap.Alert.getOrCreateInstance(alert);
+          bsAlert.close();
+        } catch (e) {
+          alert.style.opacity = '0';
+          setTimeout(() => alert.remove(), 300);
+        }
+      } else {
+        alert.style.opacity = '0';
+        setTimeout(() => alert.remove(), 300);
+      }
+    });
+  }, 4000);
+</script>

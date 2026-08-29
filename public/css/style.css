@@ -16,12 +16,11 @@ footer {
   margin-top: 1rem;
 }
 .navbar {
-  height: 5rem;
-  /* position: sticky ; */
   background-color: white;
-  position: fixed;
-  bottom: 10px;
-  margin-bottom: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 .nav-btns {
   display: flex;
@@ -29,6 +28,7 @@ footer {
 }
 .nav-link {
   color: #222222 !important;
+  font-weight: 500;
 }
 
 .f-info-links a {
@@ -464,48 +464,133 @@ form button:active {
 }
 
 /* ============================
-   MOBILE NAVBAR FIX (additive)
+   MOBILE NAVBAR & MENU FIXES
    ============================ */
 @media (max-width: 767px) {
-  /* Force the collapsed panel above any other page content */
+  .custom-navbar {
+    padding: 10px 16px !important;
+    min-height: 60px !important;
+  }
+
   .custom-navbar .navbar-collapse {
+    background-color: #ffffff;
+    padding: 1rem 1.25rem;
+    margin-top: 0.75rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    border: 1px solid #e0e0e0;
     position: relative;
     z-index: 1030;
   }
 
   .custom-navbar .navbar-nav {
-    position: relative;
-    z-index: 1030;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 8px !important;
+    width: 100% !important;
+    margin: 0 !important;
   }
 
-  /* Guarantee your link styling wins over Bootstrap's defaults */
   .custom-navbar .nav-link {
-    color: #222 !important;
-    background-color: transparent !important;
+    color: #222222 !important;
+    background-color: #f8f9fa !important;
     display: block !important;
     width: 100% !important;
+    text-align: center !important;
+    padding: 12px 16px !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    border-radius: 12px !important;
+    margin-bottom: 4px !important;
+    transition: all 0.2s ease !important;
   }
 
   .custom-navbar .nav-link:hover {
-    color: rgb(241, 86, 94) !important;
-    background-color: #f7f7f7 !important;
+    color: #fe424d !important;
+    background-color: #feebe8 !important;
+  }
+
+  .signup {
+    background-color: #fe424d !important;
+    color: #ffffff !important;
+  }
+
+  .signup:hover {
+    background-color: #e31c5f !important;
+    color: #ffffff !important;
+  }
+
+  .login {
+    background-color: #e2e8f0 !important;
+    color: #1e293b !important;
+  }
+
+  .login:hover {
+    background-color: #cbd5e1 !important;
+    color: #0f172a !important;
+  }
+
+  .logout {
+    background-color: #1e293b !important;
+    color: #ffffff !important;
+  }
+
+  .logout:hover {
+    background-color: #0f172a !important;
+    color: #ffffff !important;
+  }
+
+  .search-bar-container {
+    padding: 0 8px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .search-bar-form {
+    padding: 4px 6px 4px 14px;
+    border-radius: 30px;
+  }
+
+  .search-input-field {
+    font-size: 13px !important;
+  }
+
+  .search-submit-btn {
+    padding: 8px 16px;
+    font-size: 13px;
   }
 }
 
 .signup {
-  background-color: #E4FF30 !important;
-  color: rgb(252, 255, 246) !important;
+  background-color: #fe424d !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  border-radius: 20px;
 }
 .signup:hover {
-  background-color: #abc460 !important;
+  background-color: #e31c5f !important;
 }
 
 .login {
-  background-color: #7ea1fa !important;
-  color: rgb(243, 252, 222) !important;
+  background-color: #f1f5f9 !important;
+  color: #1e293b !important;
+  font-weight: 600 !important;
+  border-radius: 20px;
 }
 .login:hover {
-  background-color: #6b89d4 !important;
+  background-color: #e2e8f0 !important;
+}
+
+.logout {
+  background-color: #1e293b !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  border-radius: 20px;
+}
+
+.logout:hover {
+  background-color: #0f172a !important;
 }
 
 /* Hero Search Bar between Navbar & Filters */
@@ -654,5 +739,94 @@ form button:active {
   .filt-name {
     font-size: 12px;
     white-space: nowrap; /* keep labels on one line */
+  }
+}
+
+/* Modern Flash Toast Alerts */
+.custom-flash-alert {
+  max-width: 600px;
+  width: 100%;
+  min-height: 46px;
+  height: auto;
+  margin: 1.25rem auto 1rem auto;
+  border-radius: 16px;
+  padding: 10px 18px;
+  border: none;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.09);
+  animation: slideInFlash 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@keyframes slideInFlash {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.custom-flash-success {
+  background: #ecfdf5;
+  color: #065f46;
+  border-left: 5px solid #10b981;
+}
+
+.custom-flash-success .flash-icon {
+  color: #10b981;
+  font-size: 1.2rem;
+}
+
+.custom-flash-error {
+  background: #fef2f2;
+  color: #991b1b;
+  border-left: 5px solid #ef4444;
+}
+
+.custom-flash-error .flash-icon {
+  color: #ef4444;
+  font-size: 1.2rem;
+}
+
+.flash-message-text {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.flash-close-btn {
+  position: relative !important;
+  top: auto !important;
+  right: auto !important;
+  padding: 0 !important;
+  margin: 0 0 0 1rem !important;
+  width: 0.85rem !important;
+  height: 0.85rem !important;
+  min-width: 0.85rem !important;
+  min-height: 0.85rem !important;
+  max-width: 0.85rem !important;
+  max-height: 0.85rem !important;
+  box-shadow: none !important;
+  background-size: 0.85rem !important;
+  opacity: 0.6;
+  align-self: center !important;
+  transition: opacity 0.2s ease;
+}
+
+.flash-close-btn:hover {
+  opacity: 1;
+}
+
+@media (max-width: 576px) {
+  .custom-flash-alert {
+    border-radius: 12px;
+    padding: 10px 14px;
+    margin: 0.75rem auto;
+  }
+  .flash-message-text {
+    font-size: 0.88rem;
   }
 }
