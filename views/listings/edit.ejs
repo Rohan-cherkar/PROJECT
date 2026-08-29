@@ -62,5 +62,20 @@
     class="form-control"
   />
 
+  <label for="listing[category]" class="form-label">Category</label>
+  <select name="listing[category]" class="form-select mb-3">
+    <option value="">Select Category</option>
+    <option value="Trending" <%= listing.category === 'Trending' ? 'selected' : '' %>>Trending</option>
+    <option value="Rooms" <%= listing.category === 'Rooms' ? 'selected' : '' %>>Rooms</option>
+    <option value="Mountains" <%= listing.category === 'Mountains' ? 'selected' : '' %>>Mountains</option>
+    <option value="Iconic Cities" <%= listing.category === 'Iconic Cities' ? 'selected' : '' %>>Iconic Cities</option>
+    <option value="Beach" <%= listing.category === 'Beach' ? 'selected' : '' %>>Beach</option>
+    <option value="Forts" <%= listing.category === 'Forts' ? 'selected' : '' %>>Forts</option>
+    <option value="Swimming" <%= listing.category === 'Swimming' ? 'selected' : '' %>>Swimming</option>
+    <option value="Camping" <%= listing.category === 'Camping' ? 'selected' : '' %>>Camping</option>
+    <option value="Farms" <%= listing.category === 'Farms' ? 'selected' : '' %>>Farms</option>
+    <option value="Cruse" <%= listing.category === 'Cruse' ? 'selected' : '' %>>Cruse</option>
+  </select>
+
   <button>Edit</button>
 </form>

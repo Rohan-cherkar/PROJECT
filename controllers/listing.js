@@ -1,8 +1,36 @@
 const Listing = require("../models/listing");
 
 module.exports.index = async (req, res) => {
-  const allListings = await Listing.find({});
-  res.render("listings/index.ejs", { allListings });
+  const { category } = req.query;
+  let allListings;
+  if (category) {
+    const keywordMap = {
+      Trending: /trending|luxur|penthouse|island|villa|private/i,
+      Rooms: /room|loft|apartment|condo|suite|brownstone|house/i,
+      Mountains: /mountain|chalet|ski|alps|rockies|highland|peak/i,
+      "Iconic Cities": /city|downtown|penthouse|tokyo|boston|miami|new york|amsterdam|dubai|los angeles|florence/i,
+      Beach: /beach|coast|ocean|sea|bay|malibu|cancun|bali|greece|mykonos|phuket|maldives/i,
+      Forts: /fort|castle|historic|tuscany|villa|brownstone|palace/i,
+      Swimming: /swimming|pool|beach|island|water|lake|villa|maldives/i,
+      Camping: /camp|treehouse|nature|eco|forest|cabin|cottage|log/i,
+      Farms: /farm|cottage|countryside|ranch|nature|cotswolds/i,
+      Cruse: /cruse|cruise|boat|ship|island|maldives|yacht|lake/i,
+    };
+
+    const regexPattern = keywordMap[category] || new RegExp(category, "i");
+    allListings = await Listing.find({
+      $or: [
+        { category: category },
+        { title: { $regex: regexPattern } },
+        { description: { $regex: regexPattern } },
+        { location: { $regex: regexPattern } },
+        { country: { $regex: regexPattern } },
+      ],
+    });
+  } else {
+    allListings = await Listing.find({});
+  }
+  res.render("listings/index.ejs", { allListings, category });
 };
 
 module.exports.newForm = (req, res) => {

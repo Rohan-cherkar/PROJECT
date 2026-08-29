@@ -5,74 +5,77 @@
         <button>Create New Listing</button>
     </form> -->
     <div id="filters">
-        <div class="filter">
+        <a href="<%= typeof category !== 'undefined' && category === 'Trending' ? '/listings' : '/listings?category=Trending' %>" class="filter <%= typeof category !== 'undefined' && category === 'Trending' ? 'active' : '' %>">
             <div class="filt-icon"><i class="fa-solid fa-fire"></i></div>
             <p class="filt-name">Trending</p>
-            
-        </div>
-        <div class="filter">
+        </a>
+        <a href="<%= typeof category !== 'undefined' && category === 'Rooms' ? '/listings' : '/listings?category=Rooms' %>" class="filter <%= typeof category !== 'undefined' && category === 'Rooms' ? 'active' : '' %>">
             <div class="filt-icon"><i class="fa-solid fa-bed"></i></div>
             <p class="filt-name">Rooms</p>
-            
-        </div>
-        <div class="filter">
-            <div class="filt-icon"><i class="fa-solid fa-mountain-sun"></i></i></div>
+        </a>
+        <a href="<%= typeof category !== 'undefined' && category === 'Mountains' ? '/listings' : '/listings?category=Mountains' %>" class="filter <%= typeof category !== 'undefined' && category === 'Mountains' ? 'active' : '' %>">
+            <div class="filt-icon"><i class="fa-solid fa-mountain-sun"></i></div>
             <p class="filt-name">Mountains</p>
-            
-        </div>
-        <div class="filter">
-            <div class="filt-icon"><i class="fa-solid fa-city"></i></i></i></div>
+        </a>
+        <a href="<%= typeof category !== 'undefined' && category === 'Iconic Cities' ? '/listings' : '/listings?category=Iconic Cities' %>" class="filter <%= typeof category !== 'undefined' && category === 'Iconic Cities' ? 'active' : '' %>">
+            <div class="filt-icon"><i class="fa-solid fa-city"></i></div>
             <p class="filt-name">Iconic Cities</p>
-            
-        </div>
-        <div class="filter">
-            <div class="filt-icon"><i class="fa-solid fa-umbrella-beach"></i></i></i></div>
+        </a>
+        <a href="<%= typeof category !== 'undefined' && category === 'Beach' ? '/listings' : '/listings?category=Beach' %>" class="filter <%= typeof category !== 'undefined' && category === 'Beach' ? 'active' : '' %>">
+            <div class="filt-icon"><i class="fa-solid fa-umbrella-beach"></i></div>
             <p class="filt-name">Beach</p>
-            
-        </div>
-        <div class="filter">
-            <div class="filt-icon"><i class="fa-brands fa-fort-awesome"></i></i></i></div>
+        </a>
+        <a href="<%= typeof category !== 'undefined' && category === 'Forts' ? '/listings' : '/listings?category=Forts' %>" class="filter <%= typeof category !== 'undefined' && category === 'Forts' ? 'active' : '' %>">
+            <div class="filt-icon"><i class="fa-brands fa-fort-awesome"></i></div>
             <p class="filt-name">Forts</p>
-            
-        </div>
-        <div class="filter">
-            <div class="filt-icon"><i class="fa-solid fa-person-swimming"></i></i></i></i></div>
+        </a>
+        <a href="<%= typeof category !== 'undefined' && category === 'Swimming' ? '/listings' : '/listings?category=Swimming' %>" class="filter <%= typeof category !== 'undefined' && category === 'Swimming' ? 'active' : '' %>">
+            <div class="filt-icon"><i class="fa-solid fa-person-swimming"></i></div>
             <p class="filt-name">Swimming</p>
-            
-        </div>
-         <div class="filter">
-            <div class="filt-icon"><i class="fa-solid fa-umbrella-beach"></i></i></i></div>
+        </a>
+        <a href="<%= typeof category !== 'undefined' && category === 'Camping' ? '/listings' : '/listings?category=Camping' %>" class="filter <%= typeof category !== 'undefined' && category === 'Camping' ? 'active' : '' %>">
+            <div class="filt-icon"><i class="fa-solid fa-campground"></i></div>
             <p class="filt-name">Camping</p>
-            
-        </div>
-        <div class="filter">
-            <div class="filt-icon"><i class="fa-brands fa-fort-awesome"></i></i></i></div>
+        </a>
+        <a href="<%= typeof category !== 'undefined' && category === 'Farms' ? '/listings' : '/listings?category=Farms' %>" class="filter <%= typeof category !== 'undefined' && category === 'Farms' ? 'active' : '' %>">
+            <div class="filt-icon"><i class="fa-solid fa-cow"></i></div>
             <p class="filt-name">Farms</p>
-            
-        </div>
-        <div class="filter">
-            <div class="filt-icon"><i class="fa-solid fa-person-swimming"></i></i></i></i></div>
+        </a>
+        <a href="<%= typeof category !== 'undefined' && category === 'Cruse' ? '/listings' : '/listings?category=Cruse' %>" class="filter <%= typeof category !== 'undefined' && category === 'Cruse' ? 'active' : '' %>">
+            <div class="filt-icon"><i class="fa-solid fa-ship"></i></div>
             <p class="filt-name">Cruse</p>
-            
+        </a>
+    </div>
+
+    <% if (typeof category !== 'undefined' && category) { %>
+        <div class="d-flex align-items-center justify-content-between mb-3 mt-2">
+            <p class="mb-0 text-muted">Showing results for <strong>"<%= category %>"</strong> (<%= allListings.length %> listings found)</p>
+            <a href="/listings" class="btn btn-sm btn-outline-secondary">Clear Filter</a>
         </div>
-    </div>
+    <% } %>
 
-    <div class="row row-cols-lg-4  row-cols-md-2 row-cols-sm-1"> 
-        <% allListings.forEach(element => { %>
-            <a id="nev" href="/listings/<%= element._id %>">
-                <div class="card listing-card col">
-                    <img src="<%= element.image.url%>" class="card-img-top" alt="Listing Image" style="height: 20rem;">
-                    <div class="card-img-overlay"></div>
-                    <div class="card-body">
-                        <p class="card-text"><b><%= element.title%></b> <br>
-                        ₹ <%= element.price.toLocaleString("en-IN") %>
-                        </p>
-
+    <% if (allListings.length === 0) { %>
+        <div class="col-12 text-center my-5">
+            <h4 class="text-muted">No listings found matching "<%= category %>"</h4>
+            <a href="/listings" class="btn btn-danger mt-3">View All Listings</a>
+        </div>
+    <% } else { %>
+        <div class="row row-cols-lg-4 row-cols-md-2 row-cols-sm-1"> 
+            <% allListings.forEach(element => { %>
+                <a id="nev" href="/listings/<%= element._id %>">
+                    <div class="card listing-card col">
+                        <img src="<%= element.image.url%>" class="card-img-top" alt="Listing Image" style="height: 20rem;">
+                        <div class="card-img-overlay"></div>
+                        <div class="card-body">
+                            <p class="card-text"><b><%= element.title%></b> <br>
+                            ₹ <%= element.price.toLocaleString("en-IN") %>
+                            </p>
+                        </div>
                     </div>
-                </div>
-            </a>
-        <% }) %>
-    </div>
+                </a>
+            <% }) %>
+        </div>
+    <% } %>
 
     
 
